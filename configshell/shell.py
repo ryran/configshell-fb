@@ -133,7 +133,7 @@ class ConfigShell(object):
         self._parser = parser
 
         if tty:
-            readline.set_completer_delims('\t\n ~!#$^&(){}\|;\'",?')
+            readline.set_completer_delims('\t\n !#$^&(){}\|;\'",?')
             readline.set_completion_display_matches_hook(
                 self._display_completions)
 
