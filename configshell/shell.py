@@ -175,8 +175,8 @@ class ConfigShell(object):
         try:
             self.prefs.load()
         except IOError:
-            self.log.warning("Could not load preferences file %s."
-                             % self._prefs_file)
+            self.log.debug("Could not load preferences file %s."
+                           % self._prefs_file)
 
         for pref, value in six.iteritems(self.default_prefs):
             if pref not in self.prefs:
@@ -884,7 +884,7 @@ class ConfigShell(object):
 
                 self.log.exception("Keep running after an error.")
 
-    def run_interactive(self):
+    def run_interactive(self, exit_on_error=True):
         '''
         Starts interactive CLI mode.
         '''
@@ -906,6 +906,10 @@ class ConfigShell(object):
                 break
             except KeyboardInterrupt:
                 self.con.raw_write('\n')
+            except Exception as msg:
+                if exit_on_error:
+                    raise
+                self.log.error(msg)
             finally:
                 readline.set_completer(old_completer)
 
