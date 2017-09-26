@@ -25,3 +25,6 @@ from .log import Log
 from .node import ConfigNode, ExecutionError
 from .prefs import Prefs
 from .shell import ConfigShell
+
+def is_rsaw_cfshell():
+    pass
